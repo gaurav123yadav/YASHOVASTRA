@@ -1,0 +1,2 @@
+import Link from 'next/link'; import {ShoppingBag,ArrowUpRight} from 'lucide-react';
+export function ProductCard({p}:{p:any}){return <article className="productCard"><Link href={'/product/'+p.slug}><div className={'productVisual '+p.tone}><span>{p.tag}</span><div className="idol">✦</div><small>YASHOVASTRA</small></div></Link><div className="productInfo"><div><small>{p.cat}</small><h3>{p.name}</h3><b>₹{p.price.toLocaleString('en-IN')}</b></div><button><ShoppingBag size={18}/></button></div></article>}

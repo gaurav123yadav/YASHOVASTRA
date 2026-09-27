@@ -1,0 +1,2 @@
+import Link from 'next/link';
+export default function Page(){return <main className="page simple"><p className="eyebrow">YASHOVASTRA</p><h1>help <em>with devotion.</em></h1><p>This page is ready for the next phase of the YASHOVASTRA experience. The premium storefront foundation is live, with this section reserved for full functionality.</p><Link className="btn primary" href="/shop">Continue shopping →</Link></main>}
