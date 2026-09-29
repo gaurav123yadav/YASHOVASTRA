@@ -50,10 +50,16 @@ export default function CheckoutPage() {
 
   const subtotal = useMemo(
     () =>
-      cart.reduce(
-        (sum, item) => sum + item.price * Math.max(1, item.quantity),
-        0
-      ),
+      cart.reduce((sum, item) => {
+        const price = Number(item.price);
+        const quantity = Math.max(1, Number(item.quantity) || 1);
+
+        if (!Number.isFinite(price)) {
+          return sum;
+        }
+
+        return sum + price * quantity;
+      }, 0),
     [cart]
   );
 
