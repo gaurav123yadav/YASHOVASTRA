@@ -4,3 +4,7 @@ out/
 .vercel/
 *.log
 .vercel
+
+# Local environment secrets
+.env.local
+.env.*.local
