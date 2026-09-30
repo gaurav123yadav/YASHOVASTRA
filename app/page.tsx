@@ -1,262 +1,193 @@
 import Link from 'next/link';
-import {
-  ArrowRight,
-  ChevronRight,
-  Sparkles,
-  Heart,
-  ShieldCheck,
-  Truck,
-  Feather,
-  Flower2,
-} from 'lucide-react';
+import { ArrowRight, ChevronRight, Sparkles, Heart, ShieldCheck, Truck, Ruler, Star, Flower2 } from 'lucide-react';
 import { products } from '@/lib/products';
 import { ProductCard } from '@/components/ProductCard';
 
+const categories = [
+  { href: '/shop?cat=poshak', title: 'Poshak', sub: 'Daily & festive', symbol: '✦', tone: 'blue' },
+  { href: '/shop?cat=shringar', title: 'Mukut & Shringar', sub: 'Beautiful details', symbol: '✧', tone: 'plum' },
+  { href: '/shop?cat=seva', title: 'Seva Essentials', sub: 'For every darshan', symbol: '◈', tone: 'gold' },
+];
+
+const sizes = ['0', '1', '2', '3', '4'];
+
+const reviews = [
+  { name: 'Priya S.', text: 'Beautiful finish and the size guide made choosing very easy.', rating: 5 },
+  { name: 'Neha K.', text: 'The poshak looked lovely and arrived carefully packed.', rating: 5 },
+  { name: 'Aarav M.', text: 'Simple shopping experience and the product was as expected.', rating: 5 },
+];
+
 export default function Home() {
   return (
-    <main>
-      <section className="hero">
-        <div className="heroGlow heroGlowOne" />
-        <div className="heroGlow heroGlowTwo" />
-
-        <div className="heroCopy">
-          <div className="heroKicker">
-            <span>ॐ</span>
-            <span>SHRI RADHE · LADDU GOPAL SEVA</span>
-            <span>ॐ</span>
+    <main className="home">
+      <section className="heroV2">
+        <div className="heroV2Glow heroV2GlowA" />
+        <div className="heroV2Glow heroV2GlowB" />
+        <div className="heroV2Copy revealUp">
+          <span className="heroV2Kicker"><span>✦</span> LADDU GOPAL SEVA <span>✦</span></span>
+          <h1>Har shringar mein <em>prem.</em><br />Har seva mein <em>samarpan.</em></h1>
+          <p>Poshak, mukut aur shringar — thoughtfully chosen for your little Kanha.</p>
+          <div className="heroV2Actions">
+            <Link className="brandBtn brandBtnGold" href="/shop">Shop Poshak <ArrowRight size={16} /></Link>
+            <Link className="brandBtn brandBtnGhost" href="/size-guide">Find My Size <Ruler size={15} /></Link>
           </div>
+          <div className="heroV2Trust">
+            <span><ShieldCheck size={15} /> Secure payment</span>
+            <span><Truck size={15} /> India delivery</span>
+          </div>
+        </div>
+        <div className="heroV2Visual" aria-hidden="true">
+          <div className="heroOrb" />
+          <div className="heroRing heroRingOne" />
+          <div className="heroRing heroRingTwo" />
+          <div className="heroFeather">🪶</div>
+          <div className="heroFlute">────•──•──•────</div>
+          <div className="heroOm">ॐ</div>
+          <div className="floatingPetal petalA">✦</div>
+          <div className="floatingPetal petalB">✧</div>
+          <div className="floatingPetal petalC">✦</div>
+        </div>
+      </section>
 
-          <p className="eyebrow">THE ART OF LADDU GOPAL SEVA</p>
+      <section className="quickTrust">
+        <div><Sparkles size={18} /><b>Thoughtfully curated</b><span>For Laddu Gopal Ji</span></div>
+        <div><Ruler size={18} /><b>Easy size selection</b><span>Find the right fit</span></div>
+        <div><ShieldCheck size={18} /><b>Secure checkout</b><span>Protected payments</span></div>
+        <div><Truck size={18} /><b>Careful dispatch</b><span>Across India</span></div>
+      </section>
 
-          <h1>
-            हर श्रृंगार में <em>प्रेम</em>.
-            <br />
-            हर सेवा में <em>समर्पण</em>.
-          </h1>
-
-          <p className="heroText">
-            Thoughtfully curated poshak, mukut, shringar & seva essentials
-            for the little Kanha who makes your home feel complete.
-          </p>
-
-          <div className="heroBtns">
-            <Link className="btn primary" href="/shop">
-              Explore Collection <ArrowRight size={17} />
+      <section className="brandSection sizeFinderHome">
+        <div className="sectionIntro centered">
+          <span className="sectionEyebrow">FIND THE RIGHT FIT</span>
+          <h2>Shop by <em>Laddu Gopal size</em></h2>
+          <p>Choose a size and start with products made for that fit.</p>
+        </div>
+        <div className="sizeChoicesHome">
+          {sizes.map((size) => (
+            <Link key={size} href={`/shop?size=${size}`} className="sizeChoice">
+              <strong>{size} <small>NO</small></strong>
+              <span>View products</span>
+              <ChevronRight size={15} />
             </Link>
+          ))}
+        </div>
+        <Link className="sizeHelp" href="/size-guide">Not sure about the size? <b>Find it in a minute →</b></Link>
+      </section>
 
-            <Link className="textBtn" href="/size-guide">
-              Find Your Size <ChevronRight size={16} />
+      <section className="brandSection categoryHome">
+        <div className="sectionIntro">
+          <div>
+            <span className="sectionEyebrow">SHOP THE COLLECTION</span>
+            <h2>Made for <em>every seva.</em></h2>
+          </div>
+          <Link className="sectionLink" href="/shop">View all <ArrowRight size={15} /></Link>
+        </div>
+        <div className="categoryHomeGrid">
+          {categories.map((item) => (
+            <Link href={item.href} className="categoryHomeCard" key={item.title}>
+              <div className={`categoryHomeArt ${item.tone}`}>
+                <span>{item.symbol}</span>
+              </div>
+              <div className="categoryHomeInfo">
+                <div><h3>{item.title}</h3><p>{item.sub}</p></div>
+                <ArrowRight size={17} />
+              </div>
             </Link>
-          </div>
-
-          <div className="heroMiniTrust">
-            <span><Sparkles size={14} /> Handpicked</span>
-            <span><span className="dot" /> Made for seva</span>
-            <span><ShieldCheck size={14} /> Quality checked</span>
-          </div>
-        </div>
-
-        <div className="heroArt">
-          <div className="heroMandala" />
-          <div className="heroSun" />
-
-          <div className="peacockFeather featherOne">
-            <span className="featherEye">◉</span>
-          </div>
-
-          <div className="peacockFeather featherTwo">
-            <span className="featherEye">◉</span>
-          </div>
-
-          <div className="flute">
-            <span />
-            <span />
-            <span />
-            <span />
-          </div>
-
-          <div className="krishnaArch">
-            <div className="archHalo">श्री</div>
-            <div className="archRadhe">राधे</div>
-            <div className="archOm">ॐ</div>
-          </div>
-
-          <div className="heroPetal petalOne">✦</div>
-          <div className="heroPetal petalTwo">✧</div>
-          <div className="heroPetal petalThree">✦</div>
-        </div>
-      </section>
-
-      <section className="trust">
-        <div>
-          <Sparkles />
-          <span><b>Handpicked</b> with care</span>
-        </div>
-        <div>
-          <Heart />
-          <span><b>Made for</b> mindful seva</span>
-        </div>
-        <div>
-          <ShieldCheck />
-          <span><b>Quality checked</b> pieces</span>
-        </div>
-        <div>
-          <Truck />
-          <span><b>Safe shipping</b> across India</span>
-        </div>
-      </section>
-
-      <section className="section categorySection">
-        <div className="sectionHead">
-          <div>
-            <p className="eyebrow">CURATED FOR DARSHAN</p>
-            <h2>
-              Everything Kanha needs,
-              <br />
-              <em>with love.</em>
-            </h2>
-          </div>
-
-          <Link className="textBtn" href="/shop">
-            View all <ArrowRight size={16} />
-          </Link>
-        </div>
-
-        <div className="categoryGrid">
-          <Link href="/shop?cat=poshak" className="categoryCard">
-            <div className="catArt blue">
-              <div className="catHalo" />
-              <div className="catSymbol">✦</div>
-              <span>SHRINGAR</span>
-            </div>
-            <div className="categoryInfo">
-              <div>
-                <b>Poshak</b>
-                <small>Daily to festive</small>
-              </div>
-              <ChevronRight size={18} />
-            </div>
-          </Link>
-
-          <Link href="/shop?cat=shringar" className="categoryCard">
-            <div className="catArt rose">
-              <div className="catHalo" />
-              <div className="catSymbol">✧</div>
-              <span>ADORNMENT</span>
-            </div>
-            <div className="categoryInfo">
-              <div>
-                <b>Shringar</b>
-                <small>Details that delight</small>
-              </div>
-              <ChevronRight size={18} />
-            </div>
-          </Link>
-
-          <Link href="/shop?cat=seva" className="categoryCard">
-            <div className="catArt gold">
-              <div className="catHalo" />
-              <div className="catSymbol">◈</div>
-              <span>SEVA</span>
-            </div>
-            <div className="categoryInfo">
-              <div>
-                <b>Seva Essentials</b>
-                <small>For every ritual</small>
-              </div>
-              <ChevronRight size={18} />
-            </div>
-          </Link>
-        </div>
-      </section>
-
-      <section className="section cream featuredSection">
-        <div className="sectionHead">
-          <div>
-            <p className="eyebrow">THE YASHOVASTRA EDIT</p>
-            <h2>
-              Loved by <em>bhaktas.</em>
-            </h2>
-          </div>
-
-          <Link className="textBtn" href="/shop">
-            Shop collection <ArrowRight size={16} />
-          </Link>
-        </div>
-
-        <div className="productGrid">
-          {products.slice(0, 4).map((p) => (
-            <ProductCard key={p.id} p={p} />
           ))}
         </div>
       </section>
 
-      <section className="story">
-        <div className="storyArt">
-          <div className="storyGlow" />
-          <div className="storyFeather">🪶</div>
-          <div className="storyCircle">
-            <span>ॐ</span>
+      <section className="brandSection featuredHome">
+        <div className="sectionIntro">
+          <div>
+            <span className="sectionEyebrow">YASHOVASTRA EDIT</span>
+            <h2>Most <em>loved.</em></h2>
           </div>
-          <div className="storyFlute">
-            <i />
-            <i />
-            <i />
-            <i />
+          <Link className="sectionLink" href="/shop">Shop all <ArrowRight size={15} /></Link>
+        </div>
+        <div className="homeProductGrid">
+          {products.slice(0, 4).map((product) => <ProductCard key={product.id} p={product} />)}
+        </div>
+      </section>
+
+      <section className="bundleHome">
+        <div className="bundleArt" aria-hidden="true">
+          <span>✦</span><span>✧</span><span>◈</span>
+        </div>
+        <div className="bundleCopy">
+          <span className="sectionEyebrow">COMPLETE THE SEVA</span>
+          <h2>Build a beautiful <em>darshan.</em></h2>
+          <p>Pair a poshak with mukut, jewellery or aasan and create a complete look in fewer clicks.</p>
+          <div className="bundlePills"><span>Poshak</span><span>+</span><span>Mukut</span><span>+</span><span>Shringar</span></div>
+          <Link className="brandBtn brandBtnDark" href="/shop">Explore products <ArrowRight size={16} /></Link>
+        </div>
+      </section>
+
+      <section className="brandSection occasionHome">
+        <div className="sectionIntro centered">
+          <span className="sectionEyebrow">SPECIAL MOMENTS</span>
+          <h2>Celebrate every <em>darshan.</em></h2>
+        </div>
+        <div className="occasionGrid">
+          {[
+            ['Janmashtami', 'Festive poshak & shringar', 'blue'],
+            ['Daily Seva', 'Simple, beautiful essentials', 'ivory'],
+            ['Special Darshan', 'Royal details for the moment', 'plum'],
+          ].map(([title, sub, tone]) => (
+            <Link href="/shop" className={`occasionCard ${tone}`} key={title}>
+              <span>✦</span><div><h3>{title}</h3><p>{sub}</p></div><ArrowRight size={16} />
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="whyHome">
+        <div className="brandSection">
+          <div className="sectionIntro centered">
+            <span className="sectionEyebrow">WHY YASHOVASTRA</span>
+            <h2>Simple to choose. <em>Beautiful to keep.</em></h2>
+          </div>
+          <div className="whyGrid">
+            <div><span>01</span><ShieldCheck size={22} /><h3>Clear & secure</h3><p>Simple pricing and a secure checkout experience.</p></div>
+            <div><span>02</span><Ruler size={22} /><h3>Size made easy</h3><p>A guided size experience for Laddu Gopal Ji.</p></div>
+            <div><span>03</span><Heart size={22} /><h3>Curated with care</h3><p>Focused products for poshak, shringar and seva.</p></div>
+            <div><span>04</span><Truck size={22} /><h3>Easy after purchase</h3><p>Order support, shipping information and tracking.</p></div>
           </div>
         </div>
+      </section>
 
-        <div className="storyCopy">
-          <p className="eyebrow">OUR PHILOSOPHY</p>
-
-          <h2>
-            Not just an outfit.
-            <br />
-            <em>A feeling of seva.</em>
-          </h2>
-
-          <p>
-            YASHOVASTRA began with one simple thought: the little details of
-            Laddu Gopal seva deserve the same love with which they are offered.
-          </p>
-
-          <p>
-            From festive poshak to everyday essentials, every piece is chosen
-            to make your darshan feel beautiful, personal and full of warmth.
-          </p>
-
-          <Link className="btn dark" href="/about">
-            Discover our story <ArrowRight size={17} />
-          </Link>
+      <section className="brandSection reviewsHome">
+        <div className="sectionIntro centered">
+          <span className="sectionEyebrow">CUSTOMER LOVE</span>
+          <h2>From our <em>bhaktas.</em></h2>
+        </div>
+        <div className="reviewGrid">
+          {reviews.map((review) => (
+            <article className="reviewCard" key={review.name}>
+              <div className="reviewStars">{Array.from({ length: review.rating }).map((_, i) => <Star key={i} size={14} fill="currentColor" />)}</div>
+              <p>“{review.text}”</p>
+              <b>{review.name}</b><span>Verified customer</span>
+            </article>
+          ))}
         </div>
       </section>
 
-      <section className="sizeBanner">
-        <div className="sizeDecor">
-          <Feather size={42} strokeWidth={1} />
+      <section className="faqHome">
+        <div className="brandSection faqInner">
+          <div>
+            <span className="sectionEyebrow">NEED HELP?</span>
+            <h2>Quick answers,<br /><em>no searching.</em></h2>
+            <Link className="sectionLink" href="/help">Visit Help Center <ArrowRight size={15} /></Link>
+          </div>
+          <div className="faqList">
+            <details><summary>How do I choose the right size?</summary><p>Use our Size Guide for a simple recommendation before adding a product to your cart.</p></details>
+            <details><summary>How can I track my order?</summary><p>Once order tracking is available for your order, you can follow its status from the order area.</p></details>
+            <details><summary>Which payment methods are available?</summary><p>Online payments are handled through the secure Razorpay checkout flow.</p></details>
+          </div>
         </div>
-
-        <div>
-          <p className="eyebrow">A PERFECT FIT, EVERY TIME</p>
-          <h2>
-            Not sure about the <em>size?</em>
-          </h2>
-          <p>
-            Use our simple size finder to choose the right poshak with
-            confidence.
-          </p>
-        </div>
-
-        <Link className="btn primary" href="/size-guide">
-          Open size guide <ArrowRight size={17} />
-        </Link>
       </section>
 
-      <section className="closingNote">
-        <Flower2 size={19} />
-        <span>Created with devotion for every little Kanha.</span>
-        <Flower2 size={19} />
-      </section>
+      <section className="closingHome"><Flower2 size={18} /><span>हर श्रृंगार में प्रेम · हर सेवा में समर्पण</span><Flower2 size={18} /></section>
     </main>
   );
 }
